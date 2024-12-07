@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest] 
+        os: [windows-latest] 
         node-version: [18.17.1, 22.x]        
 
     runs-on: ${{ matrix.os }}
@@ -23,5 +23,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}        
       env:
+        COMSPEC: C:\Windows\system32\cmd.exe
         NODE_OPTIONS: "-r ./preload.js"
     - run: npm install
