@@ -7,8 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:    
-
+  build:
     strategy:
       matrix:
         os: [windows-latest] 
@@ -16,13 +15,16 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    defaults:
+      run:
+        shell: cmd
+
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}      
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}        
-      env:
-        COMSPEC: C:\Windows\system32\cmd.exe
-        NODE_OPTIONS: "-r ./preload.js"
-    - run: npm install
+      env:        
+        NODE_OPTIONS: "-r ./preload.js"      
+    - run: npm install      
